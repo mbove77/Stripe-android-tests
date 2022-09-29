@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Stripe Tests</string>
+    <string name="single_payment">Single Payment</string>
+    <string name="pay_now">Pay now</string>
+</resources>
