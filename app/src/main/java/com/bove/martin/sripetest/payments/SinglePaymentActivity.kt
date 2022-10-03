@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import com.bove.martin.sripetest.databinding.ActivitySinglePaymentBinding
 import com.stripe.android.paymentsheet.PaymentSheet
@@ -36,7 +35,7 @@ class SinglePaymentActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "CheckoutActivity"
-        private const val BACKEND_URL = "http://192.168.0.13:4242"
+        private const val BACKEND_URL = "https://8925-24-232-30-69.ngrok.io"
     }
 
 
@@ -97,9 +96,12 @@ class SinglePaymentActivity : AppCompatActivity() {
     }
 
     private fun onPayClicked() {
-        val configuration = PaymentSheet.Configuration("Example, Inc.")
-
-        // Present Payment Sheet
+        val googlePayConfiguration = PaymentSheet.GooglePayConfiguration(
+            environment = PaymentSheet.GooglePayConfiguration.Environment.Test,
+            countryCode = "US",
+            currencyCode = "USD" // Required for Setup Intents, optional for Payment Intents
+        )
+        val configuration = PaymentSheet.Configuration("Martin's Store", null, googlePayConfiguration)
         paymentSheet.presentWithPaymentIntent(paymentIntentClientSecret, configuration)
     }
 
